@@ -1,4 +1,5 @@
 import sys
+from typing import List, Mapping
 from PyQt6.QtWidgets import (
     QMainWindow,
     QApplication,
@@ -6,6 +7,7 @@ from PyQt6.QtWidgets import (
     QGridLayout,
     QPushButton,
 )
+from loguru import logger
 
 from pydashboard.models import DataTable, TableHeader
 from pydashboard.datatable import Table
@@ -14,7 +16,7 @@ from pydashboard.datatable import Table
 def fake_fetch(page: int):
     rows: int = 20
     cols: int = 20
-    print(f"获取第 {page} 页数据")
+    logger.info("获取第 {} 页数据", page)
     return DataTable(
         headers=[TableHeader(name=f'col-{i}', label=f"列{i+1}") for i in range(cols)],
         data=[
@@ -25,12 +27,17 @@ def fake_fetch(page: int):
     )
 
 
+def func_update(changes: List[Mapping]):
+    logger.success("更新数据：{}", changes)
+
+
 class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
         self.setWindowTitle("数据表示例")
 
-        self.server_table = Table(fetch_func=fake_fetch)
+        self.server_table = Table(func_fetch=fake_fetch,
+                                  func_update=func_update)
         # self.server_table.fetch_func = fake_fetch
 
         self.setup_ui()

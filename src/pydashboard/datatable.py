@@ -34,6 +34,7 @@ from loguru import logger
 from pydashboard.components.button import FlatButton
 from pydashboard.components.dialog import MultiSelectDialog, Item
 from pydashboard.components.pagination import PagesWidget
+from pydashboard.job import DataTableThread, ListThread
 from pydashboard.models import DataTable
 
 
@@ -108,13 +109,13 @@ class DataModel(QStandardItemModel):
             if setted_row is None:
                 # index_row 为空，则认为是新增
 
-                changes.append({"source": None, "changes": _edited_data(row)})
+                changes.append({"source": None, "change": _edited_data(row)})
                 continue
             exists_row.add(setted_row)
             changed_data = _compare_row(row)
             if changed_data:
                 changes.append(
-                    {"source": self.source.data[setted_row], "changes": changed_data}
+                    {"source": self.source.data[setted_row], "change": changed_data}
                 )
                 continue
 
@@ -122,7 +123,7 @@ class DataModel(QStandardItemModel):
         for source_row in [
             x for i, x in enumerate(self.source.data) if i not in exists_row
         ]:
-            changes.append({"source": source_row, "changes": None})
+            changes.append({"source": source_row, "change": None})
         return changes
 
     def column_index(self, name: str):
@@ -329,7 +330,8 @@ class Table(QWidget):
         hide_columns: list[int] = [],
         resize_mode=QHeaderView.ResizeMode.ResizeToContents,
         # selection_mode=QAbstractItemView.SelectionMode.MultiSelection,
-        fetch_func: Optional[Callable[[int], DataTable]] = None,
+        func_fetch: Optional[Callable[[int], DataTable]] = None,
+        func_update: Optional[Callable[[List[Mapping]], None]] = None,
     ) -> None:
         super().__init__()
         self.resize_mode = resize_mode
@@ -353,7 +355,8 @@ class Table(QWidget):
         self.page_widget = PagesWidget()
         self.page_widget.page_changed.connect(self._page_changed)
 
-        self.fetch_func = fetch_func
+        self.func_fetch = func_fetch
+        self.func_update = func_update
         self._frozen_columns: list[str] = []
         self._hide_columns: list[str] = []
 
@@ -460,20 +463,30 @@ class Table(QWidget):
 
     def _page_changed(self, page: int):
         """页码改变时触发"""
-        if not self.fetch_func:
+        if not self.func_fetch:
             return
-        FetchThread(self, partial(self.fetch_func, page)).on_started(
+        DataTableThread(self, self.func_fetch, page).on_started(
             partial(self.setEnabled, False)
         ).on_finished(partial(self.setEnabled, True)).on_success(
             self.set_datatable
         ).start()
 
     def save(self):
+        if not self.func_update:
+            return
         changes = self.model.compare()
         if not changes:
             logger.info("没有数据被修改")
             return
-        logger.info("更新数据: {}", changes)
+        logger.info("变化的数据: {}", changes)
+        ListThread(self, self.func_update, changes).on_started(
+            partial(self.setEnabled, False)
+        ).on_finished(partial(self.setEnabled, True)).on_exception(
+            lambda e: logger.error("更新失败: {}", e), self._save_failed
+        ).start()
+
+    def _save_failed(self, e: Exception):
+        QMessageBox.warning(self, "更新失败", str(e))
 
     def export(self):
         """导出数据"""
@@ -491,27 +504,3 @@ class Table(QWidget):
 
         if export_io is not sys.stdout:
             export_io.close()
-
-
-class FetchThread(QThread):
-    signal_success = pyqtSignal(DataTable)
-
-    def __init__(self, parent, func: Callable[[], DataTable]):
-        super().__init__(parent)
-        self.func = func
-
-    def on_started(self, *args: Callable[[], None]):
-        self.started.connect(*args)
-        return self
-
-    def on_finished(self, *args: Callable[[], None]):
-        self.finished.connect(*args)
-        return self
-
-    def on_success(self, *args: Callable[[DataTable], Any]):
-        self.signal_success.connect(*args)
-        return self
-
-    def run(self) -> None:
-        dt = self.func()
-        self.signal_success.emit(dt)
