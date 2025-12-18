@@ -31,8 +31,8 @@ from PyQt6.QtGui import (
     QColor,
 )
 from loguru import logger
-from pydashboard.components.button import FlatButton
-from pydashboard.components.dialog import MultiSelectDialog, Item
+from pydashboard.components.button import Colors, FlatButton
+from pydashboard.components.dialog import DraggableListDialog, MultiSelectDialog, Item
 from pydashboard.components.pagination import PagesWidget
 from pydashboard.job import DataTableThread, ListThread
 from pydashboard.models import DataTable
@@ -339,13 +339,14 @@ class Table(QWidget):
 
         self.model = DataModel(DataTable())
 
-        self.btn_add = FlatButton("新增", on_click=self.add_row, color="green")
-        self.btn_save = FlatButton("保存", on_click=self.save, color="blue")
+        self.btn_add = FlatButton("新增", on_click=self.add_row, color=Colors.SUCCESS)
+        self.btn_save = FlatButton("保存", on_click=self.save, color=Colors.PRIMARY)
         self.btn_delete = FlatButton(
-            "删除", on_click=self.delete_selected_row, color="red"
+            "删除", on_click=self.delete_selected_row, color=Colors.DANGER
         )
 
         self.btn_export = FlatButton("导出", on_click=self.export)
+        self.btn_drag = FlatButton("调整表头", on_click=self.drag_columns)
         self.btn_frozen = FlatButton("冻结", on_click=self.open_frozen_dialog)
         self.btn_hide = FlatButton("隐藏", on_click=self.open_hide_dialog)
         self.btn_refresh = FlatButton("刷新", on_click=self.refresh)
@@ -366,6 +367,7 @@ class Table(QWidget):
         self.tool_layout.addWidget(self.btn_delete)
         self.tool_layout.addStretch()
         self.tool_layout.addWidget(self.btn_export)
+        self.tool_layout.addWidget(self.btn_drag)
         self.tool_layout.addWidget(self.btn_hide)
         self.tool_layout.addWidget(self.btn_frozen)
         self.tool_layout.addWidget(self.btn_refresh)
@@ -504,3 +506,24 @@ class Table(QWidget):
 
         if export_io is not sys.stdout:
             export_io.close()
+
+    def drag_columns(self):
+        dialog = DraggableListDialog(
+            "调整列顺序",
+            [
+                Item(name=x.name, label=x.text())
+                for x in self.model.display_headers
+                if x.name not in self._frozen_columns
+            ],
+            parent=self,
+        )
+        if dialog.exec() != QDialog.DialogCode.Accepted:
+            return
+        items = dialog.get_current_order()
+
+        headers_map = {x.name: x for x in self.model.display_headers}
+        display_headers = [headers_map[x] for x in self._frozen_columns] + [
+            headers_map[x] for x in items
+        ]
+        self.model.display_headers = display_headers
+        self.model.refresh()
