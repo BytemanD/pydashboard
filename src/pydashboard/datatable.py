@@ -32,7 +32,7 @@ from PyQt6.QtGui import (
 )
 from loguru import logger
 from pydashboard.components.button import Colors, FlatButton
-from pydashboard.components.dialog import DraggableListDialog, MultiSelectDialog, Item
+from pydashboard.components.dialog import DraggableListDialog, SelectDialog, Item
 from pydashboard.components.pagination import PagesWidget
 from pydashboard.job import DataTableThread, ListThread
 from pydashboard.models import DataTable
@@ -388,10 +388,11 @@ class Table(QWidget):
 
     def open_frozen_dialog(self):
         items = [Item(name=x.name, label=x.label) for x in self.model.source.headers]
-        dialog = MultiSelectDialog(
+        dialog = SelectDialog(
             items,
             title="选择冻结的列",
-            selected=[i for i, x in enumerate(items) if x.name in self._frozen_columns],
+            selected=self._frozen_columns,
+            multiple_select=True,
             parent=self,
         )
         if dialog.exec() != QDialog.DialogCode.Accepted:
@@ -401,11 +402,11 @@ class Table(QWidget):
 
     def open_hide_dialog(self):
         """隐藏列选择器"""
-        items = [Item(name=x.name, label=x.label) for x in self.model.source.headers]
-        dialog = MultiSelectDialog(
+        dialog = SelectDialog(
             [Item(name=x.name, label=x.label) for x in self.model.source.headers],
             title="选择隐藏的列",
-            selected=[i for i, x in enumerate(items) if x.name in self._hide_columns],
+            selected=self._hide_columns,
+            multiple_select=True,
             parent=self,
         )
         if dialog.exec() != QDialog.DialogCode.Accepted:

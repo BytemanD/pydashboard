@@ -1,5 +1,5 @@
 from collections import OrderedDict
-from typing import Dict, List, Optional
+from typing import Dict, List, Optional, Sequence
 from PyQt6.QtWidgets import (
     QAbstractItemView,
     QPushButton,
@@ -26,13 +26,16 @@ class Item(BaseModel):
     label: Optional[str] = None
 
 
-class MultiSelectDialog(QDialog):
+class SelectDialog(QDialog):
+
     def __init__(
         self,
         items: list[Item],
         title: Optional[str] = None,
-        selected: List[int] = [],
+        selected: Sequence[str] = [],
+        multiple_select: bool = False,
         parent=None,
+        
     ):
         super().__init__(parent)
         self.setWindowTitle(title or "多选对话框")
@@ -40,24 +43,21 @@ class MultiSelectDialog(QDialog):
 
         self.items = items
         self.list_widget = QListWidget()
+        if multiple_select:
+            self.list_widget.setSelectionMode(QAbstractItemView.SelectionMode.MultiSelection)
+        else:
+            self.list_widget.setSelectionMode(QAbstractItemView.SelectionMode.SingleSelection)
         # 添加项目
         for item in self.items:
-            self.list_widget.addItem(item.label or item.name)
-        for x in selected:
-            item = self.list_widget.item(x)
-            if item:
-                item.setSelected(True)
+            list_item = QListWidgetItem(item.label or item.name)
+            list_item.setData(Qt.ItemDataRole.UserRole, item.name)
+            self.list_widget.addItem(list_item)
+            if item.name in selected:
+                list_item.setSelected(True)
         self.init_ui()
 
     def init_ui(self):
         layout = QVBoxLayout()
-
-        # 创建列表控件
-        self.list_widget.setSelectionMode(
-            QAbstractItemView.SelectionMode.MultiSelection
-        )
-
-
         # 按钮区域
         top_layout = QHBoxLayout()
         bottom_layout = QHBoxLayout()
@@ -95,14 +95,11 @@ class MultiSelectDialog(QDialog):
         """清除选择"""
         self.list_widget.clearSelection()
 
-    def get_selected_items(self):
+    def get_selected_items(self) -> List[str]:
         """获取选中的项目"""
-        selected = []
-        for index in range(self.list_widget.count()):
-            item = self.list_widget.item(index)
-            if item and item.isSelected():
-                selected.append(self.items[index].name)
-        return selected
+        return [
+            item.data(Qt.ItemDataRole.UserRole) for item in self.list_widget.selectedItems()
+        ]
 
 
 class DraggableListDialog(QDialog):
