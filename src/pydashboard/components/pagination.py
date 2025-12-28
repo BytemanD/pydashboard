@@ -1,7 +1,7 @@
 from PyQt6.QtWidgets import QWidget, QHBoxLayout, QLineEdit, QLabel
 from PyQt6.QtCore import pyqtSignal
 
-from pydashboard.components.button import FlatButton
+from pydashboard.components.button import MButton
 
 
 class PagesWidget(QWidget):
@@ -9,16 +9,16 @@ class PagesWidget(QWidget):
 
     def __init__(self) -> None:
         super().__init__()
-        self.btn_first = FlatButton("首页", on_click=self.first_page)
-        self.btn_prev = FlatButton("上一页", on_click=self.pre_page)
+        self.btn_first = MButton("首页", on_click=self.first_page)
+        self.btn_prev = MButton("上一页", on_click=self.pre_page)
 
         self.label_current = QLineEdit()
         self.label_current.setText("0")
         self.label_current.setMaximumWidth(50)
         self.label_total = QLabel("1")
 
-        self.btn_next = FlatButton("下一页", on_click=self.next_page)
-        self.btn_last = FlatButton("尾页", on_click=self.last_page)
+        self.btn_next = MButton("下一页", on_click=self.next_page)
+        self.btn_last = MButton("尾页", on_click=self.last_page)
 
         self._layout = QHBoxLayout(self)
         self._layout.addStretch(1)
