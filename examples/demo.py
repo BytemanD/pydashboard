@@ -113,6 +113,20 @@ class ComponentsDemo(app.MainWindow):
             5,
             1,
         )
+        self.add_label("禁用按钮", 6)
+        self.add_cell(
+            Cell(
+                [
+                    MButton("删除", color="danger").disable(),
+                    MButton("删除", color="danger", variant=Variant.ELEVATED).disable(),
+                    MButton("删除", color="danger", variant=Variant.OUTLINED).disable(),
+                    MButton("删除", color="danger", variant=Variant.TEXT).disable(),
+                    MButton("删除", color="danger", variant=Variant.PLAIN).disable(),
+                ]
+            ),
+            6,
+            1,
+        )
 
 
 if __name__ == "__main__":

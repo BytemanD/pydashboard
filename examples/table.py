@@ -50,7 +50,6 @@ class MainWindow(QMainWindow):
 if __name__ == "__main__":
     app = QApplication(sys.argv)
     theme = Theme()
-    print(theme.style_sheet)
     app.setStyleSheet(theme.style_sheet)
 
     window = MainWindow()

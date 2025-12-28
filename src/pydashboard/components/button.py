@@ -61,6 +61,10 @@ class MButton(QPushButton):
                 self.setIcon(MIcon.get(self._icon, color=self._color))
             return
 
-    def setStyle(self, a0: QStyle | None) -> None:
-        logger.info("setStyle {}", a0)
-        return super().setStyle(a0)
+    def disable(self):
+        self.setDisabled(True)
+        return self
+
+    def enable(self):
+        self.setDisabled(False)
+        return self
