@@ -1,16 +1,18 @@
 import sys
 from typing import List, Mapping
 
-from PyQt6.QtWidgets import QMainWindow, QApplication, QWidget, QGridLayout, QPushButton
+from PyQt6.QtWidgets import QMainWindow, QLabel, QWidget, QGridLayout, QPushButton
 from loguru import logger
 
 from pydashboard.components.button import MButton
 from pydashboard.components.button_group import ButtonGroup
+from pydashboard.components.icon import MIcon
 from pydashboard.layout.cell import Cell
 from pydashboard.models import DataTable, TableHeader
 
 from pydashboard.theme import Theme
 from pydashboard.style import Variant, Colors
+from pydashboard import app
 
 
 def fake_fetch(page: int):
@@ -31,100 +33,90 @@ def func_update(changes: List[Mapping]):
     logger.success("更新数据：{}", changes)
 
 
-class MainWindow(QMainWindow):
+class ComponentsDemo(app.MainWindow):
     def __init__(self):
-        super().__init__()
-        self.setWindowTitle("数据表示例")
+        super().__init__("组件")
         self.setup_ui()
 
     def setup_ui(self):
-        self.central_widget = QWidget(self)
-        self.central_layout = QGridLayout(self.central_widget)
-        for i in range(12):
-            for j in range(12):
-                self.central_layout.addWidget(QWidget(), i, j, 1, 1)
-
-        self.central_layout.addWidget(
-            Cell(items=[MButton(f"{x}", color=x) for x in Colors.model_fields]),
-            0,
+        self.add_label(Variant.FLAT.value, 0, 0)
+        self.add_cell(
+            Cell([MButton(f"{x}", color=x) for x in Colors.model_fields]),
             0,
             1,
-            6,
         )
-        self.central_layout.addWidget(
+        self.add_label(Variant.ELEVATED.value, 1, 0)
+        self.add_cell(
             Cell(
-                items=[
+                [
                     MButton(f"{x}", color=x, variant=Variant.ELEVATED)
                     for x in Colors.model_fields
                 ]
             ),
-            0,
-            6,
+            1,
+            1,
         )
-        self.central_layout.addWidget(
+        self.add_label(Variant.OUTLINED.value, 2)
+        self.add_cell(
             Cell(
-                items=[
+                [
                     MButton(f"{x}", color=x, variant=Variant.OUTLINED)
                     for x in Colors.model_fields
                 ]
                 + [
-                    MButton("info", color="info", variant=Variant.OUTLINED),
-                    MButton("purple", color="purple", variant=Variant.OUTLINED),
-                    MButton("cyan", color="cyan", variant=Variant.OUTLINED),
-                    MButton("teal", color="teal", variant=Variant.OUTLINED),
+                    MButton("lime", color="lime", variant=Variant.OUTLINED),
                 ]
             ),
+            2,
             1,
-            0,
         )
-        self.central_layout.addWidget(
+        self.add_label(Variant.TEXT.value, 3)
+        self.add_cell(
             Cell(
-                items=[
+                [
                     MButton(f"{x}", color=x, variant=Variant.TEXT)
                     for x in Colors.model_fields
                 ]
             ),
+            3,
             1,
-            6,
         )
-        self.central_layout.addWidget(
+        self.add_label(Variant.PLAIN.value, 4)
+
+        self.add_cell(
             Cell(
-                items=[
+                [
                     MButton(f"{x}", color=x, variant=Variant.PLAIN)
                     for x in Colors.model_fields
                 ]
             ),
-            2,
-            0,
+            4,
+            1,
         )
-        self.setCentralWidget(self.central_widget)
-        self.resize(1000, 600)
+        self.add_label("带图标的按钮", 5)
+        self.add_cell(
+            Cell(
+                [
+                    MButton("mdi.information", color="info", icon="mdi.information"),
+                    MButton("mdi.bell", color="primary", icon="mdi.bell"),
+                    MButton(
+                        "中文", color="warning", variant=Variant.TEXT, icon="mdi.home"
+                    ),
+                    MButton(
+                        "mdi.alert",
+                        color="danger",
+                        variant=Variant.TEXT,
+                        icon="mdi.alert",
+                    ),
+                ]
+            ),
+            5,
+            1,
+        )
 
 
 if __name__ == "__main__":
-    app = QApplication(sys.argv)
-    app.setStyleSheet(
-        Theme(
-            colors=Colors.model_validate(
-                {
-                    "info": "#03A9F4",
-                    "cyan": "#00BCD4",
-                    "teal": "#009688",
-                    "purple": "#9C27B0",
-                }
-            )
-        ).style_sheet
+    app.run(
+        ComponentsDemo(),
+        theme=Theme(colors=Colors.model_validate({"lime": "#CDDC39"})),
     )
-    font = app.font()
-    font.setPointSize(10)  # 设置字体大小为12点
-    app.setFont(font)
-    window = MainWindow()
-    window.show()
-    sys.exit(app.exec())
-
-
-if __name__ == "__main__":
-    app = QApplication(sys.argv)
-    window = MainWindow()
-    window.show()
-    sys.exit(app.exec())

@@ -17,6 +17,7 @@ class Theme(BaseModel):
         sheet = f"""
         QPushButton {{
             border-radius: 4px;
+            font: 14px;
             padding: 4px 10px 4px 10px;
         }}
         """
@@ -36,10 +37,10 @@ class Theme(BaseModel):
             }}
             QPushButton[variant="{Variant.OUTLINED.value}"][color="{name}"] {{
                 color: {self._get_color(name)};
+                border: 1px solid {self._get_color(name)};
             }}
             QPushButton[variant="{Variant.TEXT.value}"][color="{name}"] {{
-                background-color: {self._get_color(name)};
-                color: white;
+                color: {self._get_color(name)};
             }}
             QPushButton[variant="{Variant.PLAIN.value}"][color="{name}"] {{
                 color: {self._get_color(name)};

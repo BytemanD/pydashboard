@@ -32,7 +32,6 @@ from PyQt6.QtGui import (
 )
 from loguru import logger
 from pydashboard.components.button import MButton
-from pydashboard.style.color import Colors
 from pydashboard.components.dialog import DraggableListDialog, SelectDialog, Item
 from pydashboard.components.pagination import PagesWidget
 from pydashboard.job import DataTableThread, ListThread
@@ -340,17 +339,17 @@ class Table(QWidget):
 
         self.model = DataModel(DataTable())
 
-        self.btn_add = MButton("新增", on_click=self.add_row, color='success')
-        self.btn_save = MButton("保存", on_click=self.save, color='primary')
+        self.btn_add = MButton("新增", on_click=self.add_row, color="success", icon="mdi.plus")
+        self.btn_save = MButton("保存", on_click=self.save, color="primary")
         self.btn_delete = MButton(
-            "删除", on_click=self.delete_selected_row, color='danger'
+            "删除", on_click=self.delete_selected_row, color="danger", icon="mdi.trash-can"
         )
 
-        self.btn_export = MButton("导出", on_click=self.export)
-        self.btn_drag = MButton("调整表头", on_click=self.drag_columns)
-        self.btn_frozen = MButton("冻结", on_click=self.open_frozen_dialog)
-        self.btn_hide = MButton("隐藏", on_click=self.open_hide_dialog)
-        self.btn_refresh = MButton("刷新", on_click=self.refresh)
+        self.btn_export = MButton("导出", variant='outlined', color='grey', on_click=self.export)
+        self.btn_drag = MButton("调整表头", variant='outlined', color='grey', on_click=self.drag_columns)
+        self.btn_frozen = MButton("冻结", variant='outlined', color='grey', on_click=self.open_frozen_dialog)
+        self.btn_hide = MButton("隐藏", variant='outlined', color='grey', on_click=self.open_hide_dialog)
+        self.btn_refresh = MButton("刷新", variant='outlined', color='info', on_click=self.refresh)
 
         self.view = TableView(resize_mode=resize_mode)
 

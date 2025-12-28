@@ -6,6 +6,7 @@ from loguru import logger
 
 from pydashboard.models import DataTable, TableHeader
 from pydashboard.datatable import Table
+from pydashboard.theme import Theme
 
 
 def fake_fetch(page: int):
@@ -48,6 +49,10 @@ class MainWindow(QMainWindow):
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
+    theme = Theme()
+    print(theme.style_sheet)
+    app.setStyleSheet(theme.style_sheet)
+
     window = MainWindow()
     window.show()
     sys.exit(app.exec())

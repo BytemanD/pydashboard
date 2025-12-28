@@ -14,7 +14,9 @@ class Cell(QWidget):
         """
         super().__init__()
         self._layout = QVBoxLayout(self) if vertical else QHBoxLayout(self)
-        self._layout.setAlignment(Qt.AlignmentFlag.AlignLeft | Qt.AlignmentFlag.AlignTop)
+        self._layout.setAlignment(
+            Qt.AlignmentFlag.AlignLeft | Qt.AlignmentFlag.AlignTop
+        )
         self.add_widgets(items)
 
     def add_widgets(self, items: Sequence[QWidget]):
