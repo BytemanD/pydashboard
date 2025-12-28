@@ -16,9 +16,21 @@ class Theme(BaseModel):
     def style_sheet(self) -> str:
         sheet = f"""
         QPushButton {{
-            border-radius: 4px;
+            border-radius: 3px;
             font: 14px;
             padding: 4px 10px 4px 10px;
+        }}
+        QPushButton[rounded="0"] {{
+            border-radius: 0px;
+        }}
+        QPushButton[rounded="md"] {{
+            border-radius: 6px;
+        }}
+        QPushButton[rounded="lg"] {{
+            border-radius: 9px;
+        }}
+        QPushButton[rounded="xl"] {{
+            border-radius: 13px;
         }}
         """
         for name in self.colors.model_dump().keys():

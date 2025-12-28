@@ -11,10 +11,10 @@ class Colors(BaseModel):
     danger: str = "#F44336"
     warning: str = "#FF9800"
 
-    grey: str = "#9E9E9E"
     cyan: str =  "#00BCD4"
     teal: str =  "#009688"
     purple: str = "#9C27B0"
+    grey: str = "#9E9E9E"
 
     def translate(self, name: str|int) -> Optional[str|int]:
         if isinstance(name, int):

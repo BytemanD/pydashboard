@@ -18,6 +18,7 @@ class MButton(QPushButton):
         variant: Union[Variant, str] = Variant.FLAT,
         color: Optional[str] = "primary",
         icon: Optional[str] = None,
+        rounded: Optional[str] = None,
     ):
         super().__init__(text)
         self.setCursor(Qt.CursorShape.PointingHandCursor)
@@ -34,6 +35,8 @@ class MButton(QPushButton):
             else:
                 self.setIcon(MIcon.get(self._icon, color=color))
 
+        if rounded:
+            self.setProperty('rounded', rounded)
         self.setProperty(
             "variant", variant.value if isinstance(variant, Variant) else variant
         )
