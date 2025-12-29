@@ -1,4 +1,5 @@
 import sys
+import time
 from typing import List, Mapping
 
 from PyQt6.QtWidgets import QMainWindow, QApplication, QWidget, QGridLayout
@@ -13,6 +14,7 @@ def fake_fetch(page: int):
     rows: int = 20
     cols: int = 20
     logger.info("获取第 {} 页数据", page)
+    # time.sleep(3)
     return DataTable(
         headers=[TableHeader(name=f"col-{i}", label=f"列{i+1}") for i in range(cols)],
         data=[

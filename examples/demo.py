@@ -1,32 +1,14 @@
-import sys
 from typing import List, Mapping
 
-from PyQt6.QtWidgets import QMainWindow, QLabel, QWidget, QGridLayout, QPushButton
 from loguru import logger
 
 from pydashboard.components.button import MButton
 from pydashboard.components.button_group import ButtonGroup
-from pydashboard.components.icon import MIcon
 from pydashboard.layout.cell import Cell
-from pydashboard.models import DataTable, TableHeader
 
 from pydashboard.theme import Theme
 from pydashboard.style import Variant, Colors
 from pydashboard import app
-
-
-def fake_fetch(page: int):
-    rows: int = 20
-    cols: int = 20
-    logger.info("获取第 {} 页数据", page)
-    return DataTable(
-        headers=[TableHeader(name=f"col-{i}", label=f"列{i+1}") for i in range(cols)],
-        data=[
-            {f"col-{i}": f"数据({(page-1) * rows + row},{i+1})" for i in range(cols)}
-            for row in range(rows)
-        ],
-        max_page=10,
-    )
 
 
 def func_update(changes: List[Mapping]):
@@ -144,11 +126,19 @@ class ComponentsDemo(app.MainWindow):
                     MButton("hello, world", rounded="md", variant=Variant.ELEVATED),
                     MButton("hello, world", rounded="md", variant=Variant.OUTLINED),
                     MButton("hello", rounded="lg", color="success"),
-                    MButton("hello", rounded="lg", variant=Variant.ELEVATED, color="success"),
-                    MButton("hello", rounded="lg", variant=Variant.OUTLINED, color="success"),
+                    MButton(
+                        "hello", rounded="lg", variant=Variant.ELEVATED, color="success"
+                    ),
+                    MButton(
+                        "hello", rounded="lg", variant=Variant.OUTLINED, color="success"
+                    ),
                     MButton("world", rounded="xl", color="warning"),
-                    MButton("world", rounded="xl", variant=Variant.ELEVATED, color="warning"),
-                    MButton("world", rounded="xl", variant=Variant.OUTLINED, color="warning"),
+                    MButton(
+                        "world", rounded="xl", variant=Variant.ELEVATED, color="warning"
+                    ),
+                    MButton(
+                        "world", rounded="xl", variant=Variant.OUTLINED, color="warning"
+                    ),
                 ]
             ),
             8,

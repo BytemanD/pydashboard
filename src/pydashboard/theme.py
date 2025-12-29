@@ -104,22 +104,19 @@ class Theme(BaseModel):
             QPushButton[variant="{Variant.PLAIN.value}"][color="{name}"]:hover {{
                 color: {self._get_transparent_color(name)};
             }}
-            QPushButton[variant="{Variant.FLAT.value}"][color="{name}"]:disabled {{
-                background-color: #424242;
-            }}
-            
+            QPushButton[variant="{Variant.FLAT.value}"][color="{name}"]:disabled,
             QPushButton[variant="{Variant.ELEVATED.value}"][color="{name}"]:disabled {{
-                background-color:  #424242;
+                background-color:  {self._get_transparent_color(name)};
             }}
             QPushButton[variant="{Variant.OUTLINED.value}"][color="{name}"]:disabled {{
-                color: #424242;
-                border: 1px solid #424242;
+                color: {self._get_transparent_color(name)};
+                border: 1px solid {self._get_transparent_color(name)};
             }}
             QPushButton[variant="{Variant.TEXT.value}"][color="{name}"]:disabled {{
-                color: #424242;
+                color: {self._get_transparent_color(name)};
             }}
             QPushButton[variant="{Variant.PLAIN.value}"][color="{name}"]:disabled {{
-                color: #424242;
+                color: {self._get_transparent_color(name)};
             }}
             """
         return sheet

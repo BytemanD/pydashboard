@@ -354,15 +354,18 @@ class Table(QWidget):
             on_click=self.delete_selected_row,
         )
 
-        self.btn_drag = MButton("", icon="mdi.view-column", on_click=self.drag_columns)
-        self.btn_drag.setToolTip("调整列")
-        
-        self.btn_frozen = MButton(
-            "", icon="mdi.sort-variant-lock", on_click=self.open_frozen_dialog
+        self.btn_drag = MButton(
+            "", icon="mdi.view-column", tooltip="调整列", on_click=self.drag_columns
         )
-        self.btn_frozen.setToolTip("冻结列")
-        self.btn_hide = MButton("", icon="mdi.eye-off", on_click=self.open_hide_dialog)
-        self.btn_hide.setToolTip("隐藏列")
+        self.btn_frozen = MButton(
+            "",
+            icon="mdi.sort-variant-lock",
+            tooltip="冻结列",
+            on_click=self.open_frozen_dialog,
+        )
+        self.btn_hide = MButton(
+            "", icon="mdi.eye-off", tooltip="隐藏列", on_click=self.open_hide_dialog
+        )
 
         self.btn_export = MButton("导出", on_click=self.export)
         self.btn_refresh = MButton("刷新", on_click=self.refresh)
@@ -385,7 +388,7 @@ class Table(QWidget):
 
         self.tool_layout.addWidget(
             ButtonGroup(
-                [self.btn_drag, self.btn_frozen, self.btn_hide], variant="outlined"
+                [self.btn_drag, self.btn_frozen, self.btn_hide], variant="outlined", color="cyan"
             )
         )
         self.tool_layout.addStretch()
