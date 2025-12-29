@@ -2,6 +2,7 @@ import sys
 from typing import List, Mapping, Optional, Sequence, Tuple
 
 from PyQt6.QtWidgets import QMainWindow, QApplication, QWidget, QGridLayout, QLabel
+from PyQt6.QtCore import Qt
 
 
 from pydashboard.components.button import MButton

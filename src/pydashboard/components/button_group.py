@@ -1,7 +1,7 @@
 from typing import List, Optional, Sequence
 
 from PyQt6.QtWidgets import QWidget, QHBoxLayout, QPushButton
-
+from PyQt6.QtCore import Qt
 
 class ButtonGroup(QWidget):
 
@@ -10,6 +10,7 @@ class ButtonGroup(QWidget):
         items: Sequence[QPushButton],
         color: str = "grey",
         rounded: Optional[str] = None,
+        variant: Optional[str] = None,
     ):
         """A button group that contains a list of buttons.
 
@@ -19,6 +20,7 @@ class ButtonGroup(QWidget):
         super().__init__()
         self.color = color
         self.rounded= rounded
+        self.variant = variant
         self._layout = QHBoxLayout(self)
         # 移除所有间距
         self._layout.setSpacing(0)
@@ -29,14 +31,18 @@ class ButtonGroup(QWidget):
     def add_buttons(self, items: Sequence[QWidget]):
         for i, item in enumerate(items):
             item.setProperty("color", self.color)
+            if self.variant:
+                item.setProperty("variant", self.variant)
             if i == 0:
                 item.setProperty("rounded-right", "0")
-                item.setProperty("border-right-color", "grey")
+                if self.variant != "text":
+                    item.setProperty("border-right-color", "grey")
                 if self.rounded:
                     item.setProperty("rounded-left", self.rounded)
             elif i < len(items) - 1:
                 item.setProperty("rounded", "0")
-                item.setProperty("border-right-color", "grey")
+                if self.variant != "text":
+                    item.setProperty("border-right-color", "grey")
             elif i == len(items) - 1:
                 item.setProperty("rounded-left", "0")
                 if self.rounded:
