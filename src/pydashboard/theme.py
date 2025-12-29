@@ -32,6 +32,50 @@ class Theme(BaseModel):
         QPushButton[rounded="xl"] {{
             border-radius: 13px;
         }}
+        QPushButton[rounded-left="0"] {{
+            border-top-left-radius: 0px;
+            border-bottom-left-radius: 0px;
+        }}
+        QPushButton[rounded-left="md"] {{
+            border-top-left-radius: 6px;
+            border-bottom-left-radius: 6px;
+        }}
+        QPushButton[rounded-left="lg"] {{
+            border-top-left-radius: 9px;
+            border-bottom-left-radius: 9px;
+        }}
+        QPushButton[rounded-left="xl"] {{
+            border-top-left-radius: 12px;
+            border-bottom-left-radius: 12px;
+        }}
+        QPushButton[rounded-left="0"] {{
+            border-top-left-radius: 0px;
+            border-bottom-left-radius: 0px;
+        }}
+        QPushButton[rounded-right="0"] {{
+            border-top-right-radius: 0px;
+            border-bottom-right-radius: 0px;
+        }}
+        QPushButton[roundrounded-right="md"] {{
+            border-top-right-radius: 6px;
+            border-bottom-right-radius: 6px;
+        }}
+        QPushButton[rounded-right="lg"] {{
+            border-top-right-radius: 9px;
+            border-bottom-right-radius: 9px;
+        }}
+        QPushButton[rounded-right="xl"] {{
+            border-top-right-radius: 12px;
+            border-bottom-right-radius: 12px;
+        }}
+
+        QPushButton[border-left-color="grey"] {{
+            border-left: 1px solid grey;
+        }}
+        QPushButton[border-right-color="grey"] {{
+            border-right: 1px solid grey;
+        }}
+
         """
         for name in self.colors.model_dump().keys():
             sheet += f"""

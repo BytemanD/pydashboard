@@ -103,7 +103,7 @@ class ComponentsDemo(app.MainWindow):
                         "首页", color="warning", variant=Variant.TEXT, icon="mdi.home"
                     ),
                     MButton(
-                        "alert", color="danger", variant=Variant.TEXT, icon="mdi.alert"
+                        "alert", color="danger", variant=Variant.PLAIN, icon="mdi.alert"
                     ),
                 ]
             ),
@@ -143,36 +143,58 @@ class ComponentsDemo(app.MainWindow):
                     MButton("hello, world", rounded="md"),
                     MButton("hello, world", rounded="md", variant=Variant.ELEVATED),
                     MButton("hello, world", rounded="md", variant=Variant.OUTLINED),
+                    MButton("hello", rounded="lg", color="success"),
+                    MButton("hello", rounded="lg", variant=Variant.ELEVATED, color="success"),
+                    MButton("hello", rounded="lg", variant=Variant.OUTLINED, color="success"),
+                    MButton("world", rounded="xl", color="warning"),
+                    MButton("world", rounded="xl", variant=Variant.ELEVATED, color="warning"),
+                    MButton("world", rounded="xl", variant=Variant.OUTLINED, color="warning"),
                 ]
             ),
             8,
             1,
         )
 
-        self.add_label("大圆角按钮", 9)
+        self.add_label("按钮组", 9)
         self.add_cell(
             Cell(
                 [
-                    MButton("hello, world", rounded="lg"),
-                    MButton("hello, world", rounded="lg", variant=Variant.ELEVATED),
-                    MButton("hello, world", rounded="lg", variant=Variant.OUTLINED),
-                ]
+                    ButtonGroup(
+                        [
+                            MButton("", icon="mdi.plus"),
+                            MButton("", icon="mdi.trash-can"),
+                        ]
+                    ),
+                    ButtonGroup(
+                        [
+                            MButton("", icon="mdi.plus"),
+                            MButton("", icon="mdi.trash-can"),
+                        ],
+                        rounded="xl",
+                    ),
+                    ButtonGroup(
+                        [
+                            MButton("", icon="mdi.plus"),
+                            MButton("", icon="mdi.trash-can"),
+                            MButton("", icon="mdi.refresh"),
+                        ]
+                    ),
+                    ButtonGroup(
+                        [
+                            MButton("", icon="mdi.plus"),
+                            MButton("", icon="mdi.trash-can"),
+                            MButton("", icon="mdi.refresh"),
+                            MButton("", icon="mdi.home"),
+                        ],
+                        color="primary",
+                        rounded="xl",
+                    ),
+                ],
             ),
             9,
             1,
         )
-        self.add_label("椭圆按钮", 10)
-        self.add_cell(
-            Cell(
-                [
-                    MButton("hello, world", rounded="xl"),
-                    MButton("hello, world", rounded="xl", variant=Variant.ELEVATED),
-                    MButton("hello, world", rounded="xl", variant=Variant.OUTLINED),
-                ]
-            ),
-            10,
-            1,
-        )
+
 
 if __name__ == "__main__":
     app.run(
