@@ -1,5 +1,5 @@
-from PyQt6.QtWidgets import QWidget, QHBoxLayout, QLineEdit, QLabel
 from PyQt6.QtCore import pyqtSignal
+from PyQt6.QtWidgets import QHBoxLayout, QLabel, QLineEdit, QWidget
 
 from pydashboard.components.button import MButton
 

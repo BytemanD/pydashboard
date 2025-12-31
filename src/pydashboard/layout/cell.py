@@ -1,7 +1,7 @@
 from typing import Sequence
 
-from PyQt6.QtWidgets import QWidget, QVBoxLayout, QHBoxLayout
 from PyQt6.QtCore import Qt
+from PyQt6.QtWidgets import QHBoxLayout, QVBoxLayout, QWidget
 
 
 class Cell(QWidget):

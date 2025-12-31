@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
-from kivymd.uix.datatables import MDDataTable
 from kivy.metrics import dp
+from kivymd.uix.datatables import MDDataTable
 from pydantic import BaseModel
 
 from pydashboard.models import TableHeader
@@ -69,4 +69,4 @@ class Table(MDDataTable):
 
     def add_data(self, data: BaseModel):
         data_dict = data.model_dump()
-        self.row_data.append([data_dict.get(k.name, '') for k in self.headers])
+        self.row_data.append([data_dict.get(k.name, "") for k in self.headers])

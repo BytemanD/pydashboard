@@ -1,5 +1,6 @@
-from typing import Any, Callable, List, Optional
-from PyQt6.QtCore import pyqtSignal, pyqtBoundSignal, QThread
+from typing import Any, Callable
+
+from PyQt6.QtCore import QThread, pyqtBoundSignal, pyqtSignal
 
 from pydashboard.models import DataTable
 
@@ -29,7 +30,7 @@ class CommonThread(QThread):
         if not signal_success:
             return self
         if not isinstance(signal_success, pyqtBoundSignal):
-            raise ValueError('signal_success is not a pyqtBoundSignal')
+            raise ValueError("signal_success is not a pyqtBoundSignal")
         for func in args:
             signal_success.connect(func)
         return self
@@ -45,7 +46,7 @@ class CommonThread(QThread):
         except Exception as e:
             self.signal_exception.emit(e)
         else:
-            signal_success = getattr(self, 'signal_success', None)
+            signal_success = getattr(self, "signal_success", None)
             if signal_success and isinstance(signal_success, pyqtBoundSignal):
                 if result is not None:
                     signal_success.emit(result)

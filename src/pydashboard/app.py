@@ -1,18 +1,11 @@
 import sys
-from typing import List, Mapping, Optional, Sequence, Tuple
+from typing import Optional, Tuple
 
-from PyQt6.QtWidgets import QMainWindow, QApplication, QWidget, QGridLayout, QLabel
-from PyQt6.QtCore import Qt
+from PyQt6.QtWidgets import QApplication, QGridLayout, QLabel, QMainWindow, QWidget
 
-
-from pydashboard.components.button import MButton
-from pydashboard.components.button_group import ButtonGroup
 from pydashboard.components.icon import MIcon
 from pydashboard.layout.cell import Cell
-from pydashboard.models import DataTable, TableHeader
-
 from pydashboard.theme import Theme
-from pydashboard.style import Variant, Colors
 
 
 class MainWindow(QMainWindow):
@@ -34,11 +27,27 @@ class MainWindow(QMainWindow):
             for j in range(12):
                 self.central_layout.addWidget(QWidget(), i, j, 1, 1)
 
-    def add_cell(self, cell: Cell, row: int, column: int=0, rowspan: int = 1, columnspan: int = 1):
+    def add_cell(
+        self,
+        cell: Cell,
+        row: int,
+        column: int = 0,
+        rowspan: int = 1,
+        columnspan: int = 1,
+    ):
         self.central_layout.addWidget(cell, row, column, rowspan, columnspan)
 
-    def add_label(self, text: str, row: int, column: int=0, rowspan: int = 1, columnspan: int = 1):
-        self.central_layout.addWidget(Cell([QLabel(text)]), row, column, rowspan, columnspan)
+    def add_label(
+        self,
+        text: str,
+        row: int,
+        column: int = 0,
+        rowspan: int = 1,
+        columnspan: int = 1,
+    ):
+        self.central_layout.addWidget(
+            Cell([QLabel(text)]), row, column, rowspan, columnspan
+        )
 
 
 APP = QApplication(sys.argv)

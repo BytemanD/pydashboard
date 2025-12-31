@@ -1,7 +1,6 @@
-import sys
-from PyQt6.QtWidgets import QListWidget
-from PyQt6.QtCore import Qt, QMimeData
+from PyQt6.QtCore import QMimeData, Qt
 from PyQt6.QtGui import QDrag
+from PyQt6.QtWidgets import QListWidget
 
 
 class DraggableListWidget(QListWidget):

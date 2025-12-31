@@ -1,22 +1,17 @@
 from collections import OrderedDict
-from typing import Dict, List, Optional, Sequence
-from PyQt6.QtWidgets import (
-    QAbstractItemView,
-    QPushButton,
-    QVBoxLayout,
-    QHBoxLayout,
-    QDialog,
-    QListWidget,
-    QListWidgetItem,
-    QLabel,
-    QMessageBox,
-)
-
-
-from PyQt6.QtCore import Qt, QMimeData
-from PyQt6.QtGui import QDrag
+from typing import List, Optional, Sequence
 
 from pydantic import BaseModel
+from PyQt6.QtCore import Qt
+from PyQt6.QtWidgets import (
+    QAbstractItemView,
+    QDialog,
+    QHBoxLayout,
+    QListWidget,
+    QListWidgetItem,
+    QPushButton,
+    QVBoxLayout,
+)
 
 from pydashboard.components.list import DraggableListWidget
 
@@ -35,7 +30,6 @@ class SelectDialog(QDialog):
         selected: Sequence[str] = [],
         multiple_select: bool = False,
         parent=None,
-        
     ):
         super().__init__(parent)
         self.setWindowTitle(title or "多选对话框")
@@ -44,9 +38,13 @@ class SelectDialog(QDialog):
         self.items = items
         self.list_widget = QListWidget()
         if multiple_select:
-            self.list_widget.setSelectionMode(QAbstractItemView.SelectionMode.MultiSelection)
+            self.list_widget.setSelectionMode(
+                QAbstractItemView.SelectionMode.MultiSelection
+            )
         else:
-            self.list_widget.setSelectionMode(QAbstractItemView.SelectionMode.SingleSelection)
+            self.list_widget.setSelectionMode(
+                QAbstractItemView.SelectionMode.SingleSelection
+            )
         # 添加项目
         for item in self.items:
             list_item = QListWidgetItem(item.label or item.name)
@@ -98,7 +96,8 @@ class SelectDialog(QDialog):
     def get_selected_items(self) -> List[str]:
         """获取选中的项目"""
         return [
-            item.data(Qt.ItemDataRole.UserRole) for item in self.list_widget.selectedItems()
+            item.data(Qt.ItemDataRole.UserRole)
+            for item in self.list_widget.selectedItems()
         ]
 
 

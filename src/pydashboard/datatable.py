@@ -1,44 +1,33 @@
-from collections import defaultdict
-
-from functools import partial
 import sys
-from typing import Any, Callable, Dict, List, Mapping, Optional, Tuple, Union
-from PyQt6.QtWidgets import (
-    QTableView,
-    QHeaderView,
-    QFrame,
-    QAbstractItemView,
-    QWidget,
-    QVBoxLayout,
-    QMessageBox,
-    QHBoxLayout,
-    QDialog,
-)
+from functools import partial
+from typing import Any, Callable, Dict, List, Mapping, Optional
+
+from loguru import logger
 from PyQt6.QtCore import (
-    Qt,
     QItemSelection,
     QItemSelectionModel,
-    pyqtSignal,
-    QThread,
+    Qt,
     QTimer,
 )
-from PyQt6.QtGui import (
-    QShowEvent,
-    QStandardItem,
-    QStandardItemModel,
-    QStandardItem,
-    QPalette,
-    QColor,
+from PyQt6.QtGui import QColor, QPalette, QShowEvent, QStandardItem, QStandardItemModel
+from PyQt6.QtWidgets import (
+    QAbstractItemView,
+    QDialog,
+    QFrame,
+    QHBoxLayout,
+    QHeaderView,
+    QMessageBox,
+    QTableView,
+    QVBoxLayout,
+    QWidget,
 )
-from loguru import logger
+
 from pydashboard.components.button import MButton
 from pydashboard.components.button_group import ButtonGroup
-from pydashboard.components.dialog import DraggableListDialog, SelectDialog, Item
+from pydashboard.components.dialog import DraggableListDialog, Item, SelectDialog
 from pydashboard.components.pagination import PagesWidget
 from pydashboard.job import DataTableThread, ListThread
-from pydashboard.layout.cell import Cell
 from pydashboard.models import DataTable
-
 
 CustomRole = Qt.ItemDataRole.UserRole + 100
 
@@ -388,7 +377,9 @@ class Table(QWidget):
 
         self.tool_layout.addWidget(
             ButtonGroup(
-                [self.btn_drag, self.btn_frozen, self.btn_hide], variant="outlined", color="cyan"
+                [self.btn_drag, self.btn_frozen, self.btn_hide],
+                variant="outlined",
+                color="cyan",
             )
         )
         self.tool_layout.addStretch()

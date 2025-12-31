@@ -1,9 +1,8 @@
 from typing import Any, Callable, Optional, Union
 
-from PyQt6.QtWidgets import QPushButton, QGraphicsDropShadowEffect, QApplication, QStyle
-from PyQt6.QtCore import QObject, Qt, QEvent, QTimer
-from PyQt6.QtGui import QEnterEvent, QPaintEvent, QPalette, QColor
-from loguru import logger
+from PyQt6.QtCore import QEvent, Qt
+from PyQt6.QtGui import QEnterEvent
+from PyQt6.QtWidgets import QGraphicsDropShadowEffect, QPushButton
 
 from pydashboard.components.icon import MIcon
 from pydashboard.theme import Variant
@@ -76,7 +75,11 @@ class MButton(QPushButton):
     def _update_icon(self):
         if not self._icon:
             return
-        if self.variant in [Variant.OUTLINED.value, Variant.TEXT.value, Variant.PLAIN.value]:
+        if self.variant in [
+            Variant.OUTLINED.value,
+            Variant.TEXT.value,
+            Variant.PLAIN.value,
+        ]:
             self.setIcon(MIcon.get(self._icon, color=self.color))
         else:
             self.setIcon(MIcon.get(self._icon, color="white"))

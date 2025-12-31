@@ -1,5 +1,6 @@
 from PyQt6.QtGui import QStandardItem, QStandardItemModel
 
+
 def make_model(rows: int, cols: int):
     model = QStandardItemModel(rows, cols)
     for row in range(rows):

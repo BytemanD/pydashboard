@@ -1,7 +1,7 @@
-from typing import List, Optional, Sequence
+from typing import Optional, Sequence
 
-from PyQt6.QtWidgets import QWidget, QHBoxLayout, QPushButton
-from PyQt6.QtCore import Qt
+from PyQt6.QtWidgets import QHBoxLayout, QPushButton, QWidget
+
 
 class ButtonGroup(QWidget):
 
@@ -19,7 +19,7 @@ class ButtonGroup(QWidget):
         """
         super().__init__()
         self.color = color
-        self.rounded= rounded
+        self.rounded = rounded
         self.variant = variant
         self._layout = QHBoxLayout(self)
         # 移除所有间距

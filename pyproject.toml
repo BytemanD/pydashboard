@@ -17,5 +17,22 @@ url = "https://pypi.tuna.tsinghua.edu.cn/simple"
 
 [dependency-groups]
 dev = [
+    "autoflake>=2.3.1",
+    "black>=25.12.0",
+    "dos2unix>=1",
+    "isort>=7.0.0",
     "pyinstaller>=6.17.0",
+    "termcolor>=3.3.0",
 ]
+
+[tool.pylint]
+disable = [
+    "missing-class-docstring",
+    'missing-class-docstring',
+    'missing-module-docstring',
+    'missing-function-docstring',
+    'too-few-public-methods',
+]
+
+[tool.isort]
+profile = "black"

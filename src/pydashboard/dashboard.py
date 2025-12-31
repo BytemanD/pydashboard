@@ -1,11 +1,17 @@
-from PyQt6.QtWidgets import QMainWindow, QWidget, QGridLayout, QLabel
-from PyQt6.QtWidgets import QHBoxLayout, QVBoxLayout
 from PyQt6.QtCore import Qt
+from PyQt6.QtWidgets import (
+    QGridLayout,
+    QHBoxLayout,
+    QLabel,
+    QMainWindow,
+    QVBoxLayout,
+    QWidget,
+)
 
 
 class Dashboard(QMainWindow):
 
-    def __init__(self, title: str = "Dashboard", *args, **kwargs):
+    def __init__(self, *args, title: str = "Dashboard", **kwargs):
         super().__init__(*args, **kwargs)
 
         self.setWindowTitle(title)
