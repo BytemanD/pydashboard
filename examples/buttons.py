@@ -11,13 +11,9 @@ from pydashboard.style import Variant, Colors
 from pydashboard import app
 
 
-def func_update(changes: List[Mapping]):
-    logger.success("更新数据：{}", changes)
-
-
 class ComponentsDemo(app.MainWindow):
     def __init__(self):
-        super().__init__("组件")
+        super().__init__("按钮")
         self.setup_ui()
 
     def setup_ui(self):
