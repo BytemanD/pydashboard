@@ -1,6 +1,6 @@
 from pydantic import BaseModel
 
-from pydashboard.style import Colors, HoverColors, Variant
+from pydashboard.style import Colors, HoverColors
 from pydashboard.style.border import BorderRadius
 from pydashboard.style.size import Size
 

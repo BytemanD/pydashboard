@@ -1,11 +1,10 @@
-from typing import Any, Callable, Optional, Union
+from typing import Callable, Optional
 
 from PyQt6.QtCore import QEvent, Qt
 from PyQt6.QtGui import QEnterEvent
-from PyQt6.QtWidgets import QGraphicsDropShadowEffect, QPushButton
+from PyQt6.QtWidgets import QPushButton
 from qtawesome import icon as qta_icon
 
-from pydashboard.components.icon import MIcon
 from pydashboard.layout.frame import Container
 from pydashboard.theme import Variant
 
@@ -21,7 +20,7 @@ class MButton(Container):
         **kwargs,
     ):
         self._btn = QPushButton(text)
-        
+
         self._icon = icon
 
         super().__init__(**kwargs)
@@ -57,7 +56,9 @@ class MButton(Container):
         if not self._icon:
             return
         if self._variant in [Variant.OUTLINED, Variant.TEXT, Variant.PLAIN]:
-            self._btn.setIcon(qta_icon(self._icon, color=self.theme.get_hover_color(self._color)))
+            self._btn.setIcon(
+                qta_icon(self._icon, color=self.theme.get_hover_color(self._color))
+            )
             # Icon(self._icon, color=self._color))
         else:
             self._btn.setIcon(qta_icon(self._icon, color="white"))

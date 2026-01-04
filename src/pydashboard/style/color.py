@@ -22,7 +22,6 @@ class Colors(BaseModel):
         return name
 
 
-
 class HoverColors(BaseModel):
     model_config = ConfigDict(extra="allow")
 

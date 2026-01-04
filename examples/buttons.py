@@ -19,7 +19,7 @@ class ComponentsDemo(app.MainWindow):
     def setup_ui(self):
         self.add_label(Variant.FLAT.value, 0, 0)
         self.add_cell(
-            Cell([MButton(f"{x}", color=x) for x in Colors.model_fields]),
+            Cell([MButton(x, color=x) for x in Colors.model_fields.keys()]),
             0,
             1,
         )
@@ -27,8 +27,8 @@ class ComponentsDemo(app.MainWindow):
         self.add_cell(
             Cell(
                 [
-                    MButton(f"{x}", color=x, variant=Variant.ELEVATED)
-                    for x in Colors.model_fields
+                    MButton(x, color=x, variant=Variant.ELEVATED)
+                    for x in Colors.model_fields.keys()
                 ]
             ),
             1,
@@ -38,8 +38,8 @@ class ComponentsDemo(app.MainWindow):
         self.add_cell(
             Cell(
                 [
-                    MButton(f"{x}", color=x, variant=Variant.OUTLINED)
-                    for x in Colors.model_fields
+                    MButton(x, color=x, variant=Variant.OUTLINED)
+                    for x in Colors.model_fields.keys()
                 ]
                 + [
                     MButton("lime", color="lime", variant=Variant.OUTLINED),
@@ -52,8 +52,8 @@ class ComponentsDemo(app.MainWindow):
         self.add_cell(
             Cell(
                 [
-                    MButton(f"{x}", color=x, variant=Variant.TEXT)
-                    for x in Colors.model_fields
+                    MButton(x, color=x, variant=Variant.TEXT)
+                    for x in Colors.model_fields.keys()
                 ]
             ),
             3,
@@ -64,8 +64,8 @@ class ComponentsDemo(app.MainWindow):
         self.add_cell(
             Cell(
                 [
-                    MButton(f"{x}", color=x, variant=Variant.PLAIN)
-                    for x in Colors.model_fields
+                    MButton(x, color=x, variant=Variant.PLAIN)
+                    for x in Colors.model_fields.keys()
                 ]
             ),
             4,
@@ -155,14 +155,13 @@ class ComponentsDemo(app.MainWindow):
                         "xl radius",
                         border_radius="xl",
                         color="danger",
-                        variant='outlined'
-                        
+                        variant="outlined",
                     ),
                     MButton(
                         "round radius",
                         border_radius="round",
                         color="cyan",
-                        variant='outlined'
+                        variant="outlined",
                     ),
                 ]
             ),

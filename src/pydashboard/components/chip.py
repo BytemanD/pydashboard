@@ -1,23 +1,13 @@
-from typing import Any, Callable, Optional, Union
+from typing import Optional
 
-from PyQt6.QtCore import QEvent, Qt
-from PyQt6.QtGui import QEnterEvent
+from PyQt6.QtCore import Qt
 from PyQt6.QtWidgets import (
-    QGraphicsDropShadowEffect,
     QLabel,
-    QWidget,
-    QFrame,
-    QHBoxLayout,
-    QStyle,
 )
 from qtawesome import icon as qta_icon
 
 from pydashboard.components.button import MButton
-from pydashboard.components.icon import MIcon
 from pydashboard.layout.frame import Container
-from pydashboard.style.border import BorderRadius
-from pydashboard.theme import Theme
-from pydashboard.theme import Variant
 
 
 class MChip(Container):

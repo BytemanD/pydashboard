@@ -1,10 +1,14 @@
-from typing import Any, Callable, Optional, Sequence, Union
+from typing import Optional, Sequence
 
-from PyQt6.QtWidgets import QFrame, QHBoxLayout, QVBoxLayout, QWidget
-from PyQt6.QtCore import pyqtSignal, Qt
-from PyQt6.QtWidgets import QGraphicsDropShadowEffect
+from PyQt6.QtCore import Qt, pyqtSignal
+from PyQt6.QtWidgets import (
+    QFrame,
+    QGraphicsDropShadowEffect,
+    QHBoxLayout,
+    QVBoxLayout,
+    QWidget,
+)
 
-from pydashboard.style.size import Size
 from pydashboard.style.variant import Variant
 from pydashboard.theme import Theme
 
