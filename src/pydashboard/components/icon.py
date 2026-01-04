@@ -7,14 +7,6 @@ from pydashboard.style.color import Colors
 
 
 class MIcon:
-    COLORS: Colors = Colors()
 
-    @classmethod
-    def get(cls, name: str, color: Optional[str] = None) -> QIcon:
-        if "." not in name:
-            name = "mdi." + name
-        if color:
-            c = cls.COLORS.translate(color)
-        else:
-            c = "white"
-        return qta_icon(name, color=c or "white")
+    def __init__(self, name: str, color: Optional[str] = None):
+        pass

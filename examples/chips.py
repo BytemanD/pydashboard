@@ -39,9 +39,9 @@ class ComponentsDemo(app.MainWindow):
             2,
             1,
         )
-        self.add_label(Variant.TEXT.value, 3, 0)
+        self.add_label(Variant.TEXT, 3, 0)
         self.add_cell(
-            Cell([MChip(f"{x}", color=x, variant="text") for x in Colors.model_fields]),
+            Cell([MChip(f"{x}", variant=Variant.TEXT) for x in Colors.model_fields]),
             3,
             1,
         )
@@ -66,24 +66,24 @@ class ComponentsDemo(app.MainWindow):
         self.add_cell(
             Cell(
                 [
-                    MChip(f"首页", label=True, prepend_icon='mdi.home'),
-                    MChip(f"首页", label=True, prepend_icon='mdi.plus', append_icon='mdi.trash-can'),
+                    MChip(f"首页", prepend_icon='mdi.home'),
+                    MChip(f"首页", prepend_icon='mdi.plus', append_icon='mdi.trash-can'),
                 ]
             ),
             5,
             1,
         )
 
-        self.add_label("可关闭", 6, 0)
-        self.add_cell(
-            Cell(
-                [
-                    MChip(f"首页", label=True, prepend_icon='mdi.home', closable=True),
-                ]
-            ),
-            6,
-            1,
-        )
+        # self.add_label("可关闭", 6, 0)
+        # self.add_cell(
+        #     Cell(
+        #         [
+        #             MChip(f"首页", prepend_icon='mdi.home', closable=True),
+        #         ]
+        #     ),
+        #     6,
+        #     1,
+        # )
 
 
 if __name__ == "__main__":

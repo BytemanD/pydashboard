@@ -57,6 +57,6 @@ def run(window: MainWindow, theme: Optional[Theme] = None):
     theme = theme or Theme()
     MIcon.COLORS = theme.colors
 
-    APP.setStyleSheet(theme.style_sheet)
+    # APP.setStyleSheet(theme.style_sheet)
     window.show()
     sys.exit(APP.exec())

@@ -106,34 +106,63 @@ class ComponentsDemo(app.MainWindow):
         self.add_cell(
             Cell(
                 [
-                    MButton("hello, world", rounded="0"),
-                    MButton("hello, world", rounded="0", variant=Variant.ELEVATED),
-                    MButton("hello, world", rounded="0", variant=Variant.OUTLINED),
+                    MButton("hello, world", border_radius="none"),
+                    MButton(
+                        "hello, world", border_radius="none", variant=Variant.ELEVATED
+                    ),
+                    MButton(
+                        "hello, world", border_radius="none", variant=Variant.OUTLINED
+                    ),
                 ]
             ),
             7,
             1,
         )
-        self.add_label("中等圆角按钮", 8)
+        self.add_label("圆角按钮", 8)
         self.add_cell(
             Cell(
                 [
-                    MButton("hello, world", rounded="md"),
-                    MButton("hello, world", rounded="md", variant=Variant.ELEVATED),
-                    MButton("hello, world", rounded="md", variant=Variant.OUTLINED),
-                    MButton("hello", rounded="lg", color="success"),
+                    MButton("sm radius", border_radius="sm"),
+                    MButton("sm radius", border_radius="sm", variant=Variant.ELEVATED),
+                    MButton("sm radius", border_radius="sm", variant=Variant.OUTLINED),
+                    MButton("md radius", border_radius="md", color="success"),
                     MButton(
-                        "hello", rounded="lg", variant=Variant.ELEVATED, color="success"
+                        "md radius",
+                        border_radius="md",
+                        color="success",
+                        variant=Variant.ELEVATED,
                     ),
                     MButton(
-                        "hello", rounded="lg", variant=Variant.OUTLINED, color="success"
+                        "md radius",
+                        border_radius="md",
+                        color="success",
+                        variant=Variant.OUTLINED,
                     ),
-                    MButton("world", rounded="xl", color="warning"),
+                    MButton("lg radius", border_radius="lg", color="warning"),
                     MButton(
-                        "world", rounded="xl", variant=Variant.ELEVATED, color="warning"
+                        "lg radius",
+                        border_radius="lg",
+                        color="warning",
+                        variant=Variant.ELEVATED,
                     ),
                     MButton(
-                        "world", rounded="xl", variant=Variant.OUTLINED, color="warning"
+                        "lg radius",
+                        border_radius="lg",
+                        color="warning",
+                        variant=Variant.OUTLINED,
+                    ),
+                    MButton(
+                        "xl radius",
+                        border_radius="xl",
+                        color="danger",
+                        variant='outlined'
+                        
+                    ),
+                    MButton(
+                        "round radius",
+                        border_radius="round",
+                        color="cyan",
+                        variant='outlined'
                     ),
                 ]
             ),
@@ -141,45 +170,45 @@ class ComponentsDemo(app.MainWindow):
             1,
         )
 
-        self.add_label("按钮组", 9)
-        self.add_cell(
-            Cell(
-                [
-                    ButtonGroup(
-                        [
-                            MButton("", icon="mdi.plus"),
-                            MButton("", icon="mdi.trash-can"),
-                        ]
-                    ),
-                    ButtonGroup(
-                        [
-                            MButton("", icon="mdi.plus"),
-                            MButton("", icon="mdi.trash-can"),
-                        ],
-                        rounded="xl",
-                    ),
-                    ButtonGroup(
-                        [
-                            MButton("", icon="mdi.plus"),
-                            MButton("", icon="mdi.trash-can"),
-                            MButton("", icon="mdi.refresh"),
-                        ]
-                    ),
-                    ButtonGroup(
-                        [
-                            MButton("", icon="mdi.plus"),
-                            MButton("", icon="mdi.trash-can"),
-                            MButton("", icon="mdi.refresh"),
-                            MButton("", icon="mdi.home"),
-                        ],
-                        color="primary",
-                        rounded="xl",
-                    ),
-                ],
-            ),
-            9,
-            1,
-        )
+        # self.add_label("按钮组", 9)
+        # self.add_cell(
+        #     Cell(
+        #         [
+        #             ButtonGroup(
+        #                 [
+        #                     MButton("", icon="mdi.plus"),
+        #                     MButton("", icon="mdi.trash-can"),
+        #                 ]
+        #             ),
+        #             ButtonGroup(
+        #                 [
+        #                     MButton("", icon="mdi.plus"),
+        #                     MButton("", icon="mdi.trash-can"),
+        #                 ],
+        #                 border_radius="xl",
+        #             ),
+        #             ButtonGroup(
+        #                 [
+        #                     MButton("", icon="mdi.plus"),
+        #                     MButton("", icon="mdi.trash-can"),
+        #                     MButton("", icon="mdi.refresh"),
+        #                 ]
+        #             ),
+        #             ButtonGroup(
+        #                 [
+        #                     MButton("", icon="mdi.plus"),
+        #                     MButton("", icon="mdi.trash-can"),
+        #                     MButton("", icon="mdi.refresh"),
+        #                     MButton("", icon="mdi.home"),
+        #                 ],
+        #                 color="primary",
+        #                 border_radius="round",
+        #             ),
+        #         ],
+        #     ),
+        #     9,
+        #     1,
+        # )
 
 
 if __name__ == "__main__":

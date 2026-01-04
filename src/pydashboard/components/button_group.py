@@ -9,7 +9,7 @@ class ButtonGroup(QWidget):
         self,
         items: Sequence[QPushButton],
         color: str = "grey",
-        rounded: Optional[str] = None,
+        border_radius: Optional[str] = None,
         variant: Optional[str] = None,
     ):
         """A button group that contains a list of buttons.
@@ -19,7 +19,7 @@ class ButtonGroup(QWidget):
         """
         super().__init__()
         self.color = color
-        self.rounded = rounded
+        self.rounded = border_radius
         self.variant = variant
         self._layout = QHBoxLayout(self)
         # 移除所有间距
